@@ -1,4 +1,10 @@
-Eio 1.7.0
+Eio 1.7.1
+
+Changes since Eio 1.7.0:
+-------------------------
+
+Improvements:
+	- path monitoring on Windows.
 
 Changes since Eio 1.0.0:
 -------------------------
@@ -14,6 +20,6 @@ Fixes:
 	- Fix memory leak when using file_associate.
 
 Improvements:
-	- Add log debuggong macros
+	- Add log debugging macros.
 
 Removal:
