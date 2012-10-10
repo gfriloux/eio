@@ -6,6 +6,10 @@ Changes since Eio 1.7.0:
 Improvements:
 	- path monitoring on Windows.
 
+Fixes:
+        - Fix memory corruption by allocating enough memory in
+        eio_eet_data_read_cipher().
+
 Changes since Eio 1.0.0:
 -------------------------
 
