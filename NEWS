@@ -1,3 +1,12 @@
+Eio 1.7.3
+
+Changes since Eio 1.7.2:
+------------------------
+
+Fixes:
+	- Fix build on Solaris.
+	- Don't leak fd on exec.
+
 Eio 1.7.2
 
 Changes since Eio 1.7.1:
