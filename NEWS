@@ -6,6 +6,7 @@ Changes since Eio 1.7.2:
 Fixes:
 	- Fix build on Solaris.
 	- Don't leak fd on exec.
+	- Don't stop on limited access right.
 
 Eio 1.7.2
 
