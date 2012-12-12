@@ -1,3 +1,10 @@
+Eio 1.7.4
+Changes since Eio 1.7.2:
+------------------------
+
+Fixes:
+        - Fixed crash in eio_monitor_del
+
 Eio 1.7.3
 
 Changes since Eio 1.7.2:
