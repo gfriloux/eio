@@ -77,4 +77,8 @@
 
 2012-12-12  Mike Blumenkrantz
 
-        * Fixed crash in eio_monitor_del
+        * Fixed crash in eio_monitor_del.
+
+2012-12-14  Cedric Bail
+
+	* Properly destroy fd on exec.

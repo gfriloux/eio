@@ -184,7 +184,7 @@ _eio_inotify_handler(void *data __UNUSED__, Ecore_Fd_Handler *fdh)
 void eio_monitor_backend_init(void)
 {
    int fd;
-#ifdef HAVE_EXECVP
+#ifdef HAVE_FCNTL
    int flags;
 #endif
 
@@ -192,7 +192,7 @@ void eio_monitor_backend_init(void)
    if (fd < 0)
      return ;
 
-#ifdef HAVE_EXECVP
+#ifdef HAVE_FCNTL
    flags = fcntl(fd, F_GETFD);
    flags |= FD_CLOEXEC;
    fcntl(fd, F_SETFD, flags);

@@ -1,9 +1,11 @@
 Eio 1.7.4
-Changes since Eio 1.7.2:
+
+Changes since Eio 1.7.3:
 ------------------------
 
 Fixes:
-        - Fixed crash in eio_monitor_del
+        - Fixed crash in eio_monitor_del.
+	- Properly destroy fd on exec.
 
 Eio 1.7.3
 
