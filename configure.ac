@@ -288,6 +288,9 @@ echo "  Inotify..............: ${have_inotify}"
 echo "  Windows notification.: ${have_notify_win32}"
 echo
 echo "  Documentation........: ${build_doc}"
+if test "x${build_doc}" = "xyes" ; then
+echo "    Installation.......: make install-doc"
+fi
 echo "  Examples...............: ${enable_build_examples}"
 echo "  Examples installed.....: ${enable_install_examples}"
 echo

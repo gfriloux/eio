@@ -44,10 +44,14 @@ m4/eio_check_options.m4
 pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = eio.pc
 
-.PHONY: doc coverage benchmark
+.PHONY: doc install-doc coverage benchmark
 
 # Documentation
 
 doc:
 	@echo "entering doc/"
 	make -C doc doc
+
+install-doc:
+	@echo "entering doc/"
+	make -C doc install-doc
