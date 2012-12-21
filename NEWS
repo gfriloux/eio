@@ -6,6 +6,9 @@ Changes since Eio 1.7.3:
 Fixes:
         - Fixed crash in eio_monitor_del.
 	- Properly destroy fd on exec.
+        - Add XML output to doc
+        - Add installation rule for doc
+
 
 Eio 1.7.3
 
