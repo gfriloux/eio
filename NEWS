@@ -1,3 +1,11 @@
+Eio 1.7.5
+Changes since Eio 1.7.4:
+------------------------
+
+Fixes:
+        * Functions no longer crash when passed NULL and throw errors accordingly
+
+
 Eio 1.7.4
 
 Changes since Eio 1.7.3:
