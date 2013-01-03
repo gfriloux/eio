@@ -2,6 +2,9 @@ Eio 1.7.5
 Changes since Eio 1.7.4:
 ------------------------
 
+Add:
+	* Add eio_eet_sync symbol.
+
 Fixes:
         * Functions no longer crash when passed NULL and throw errors accordingly
 
