@@ -104,4 +104,6 @@
 
 	* 1.7.5 release
 
+2013-01-14  Cedric Bail
 
+	* Fix wrong initialization of container in eio_file_map_new.

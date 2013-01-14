@@ -1,4 +1,14 @@
+Eio 1.7.6
+
+Changes since Eio 1.7.5:
+------------------------
+
+Fixes:
+	* Fix wrongly set container in eio_file_map_new.
+
+
 Eio 1.7.5
+
 Changes since Eio 1.7.4:
 ------------------------
 
