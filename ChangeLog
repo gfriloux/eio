@@ -107,3 +107,7 @@
 2013-01-14  Cedric Bail
 
 	* Fix wrong initialization of container in eio_file_map_new.
+
+2013-04-04  Rafael Antognolli
+
+        * 1.7.6 release
