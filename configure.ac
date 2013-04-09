@@ -3,6 +3,8 @@
 m4_define([v_maj], [1])
 m4_define([v_min], [7])
 m4_define([v_mic], [6])
+##-- v_nano will only be used for this quickly release fix, only for Evas. Remove it for next releases.
+m4_define([v_nano], [1])
 m4_define([v_rev], m4_esyscmd([(git rev-list --count HEAD 2>/dev/null || echo 0) | tr -d '\n']))dnl
 ##--   When released, remove the dnl on the below line
 m4_undefine([v_rev])
@@ -11,7 +13,7 @@ dnl m4_define([relname], [ver-pre-svn-09])
 dnl m4_define([v_rel], [-release relname])
 ##--##--##--##--##--##--##--##--##--##--##--##--##--##--##--##--##
 m4_ifdef([v_rev], [m4_define([v_ver], [v_maj.v_min.v_mic.v_rev])],
-[m4_define([v_ver], [v_maj.v_min.v_mic])])
+[m4_define([v_ver], [v_maj.v_min.v_mic.v_nano])])
 m4_define([lt_rev], m4_eval(v_maj + v_min))
 m4_define([lt_cur], v_mic)
 m4_define([lt_age], v_min)
