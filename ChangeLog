@@ -111,3 +111,11 @@
 2013-04-04  Rafael Antognolli
 
         * 1.7.6 release
+
+2013-04-06  Rafael Antognolli
+
+        * Fix examples sources installation.
+
+2013-04-09  Rafael Antognolli
+
+        * 1.7.6.1 release
