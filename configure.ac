@@ -2,7 +2,7 @@
 ##--##--##--##--##--##--##--##--##--##--##--##--##--##--##--##--##
 m4_define([v_maj], [1])
 m4_define([v_min], [7])
-m4_define([v_mic], [6])
+m4_define([v_mic], [7])
 m4_define([v_rev], m4_esyscmd([(git rev-list --count HEAD 2>/dev/null || echo 0) | tr -d '\n']))dnl
 ##--   When released, remove the dnl on the below line
 m4_undefine([v_rev])
@@ -107,15 +107,15 @@ EFL_CHECK_DOXYGEN([build_doc="yes"], [build_doc="no"])
 EFL_EIO_BUILD=""
 case "$host_os" in
    mingw*)
-      PKG_CHECK_EXISTS([evil >= 1.7.6])
+      PKG_CHECK_EXISTS([evil >= 1.7.7])
       AC_DEFINE([HAVE_EVIL], [1], [Set to 1 if evil package is installed])
-      requirements_eio="${requirements_eio} evil >= 1.7.6"
+      requirements_eio="${requirements_eio} evil >= 1.7.7"
       EFL_EIO_BUILD="-DEFL_EIO_BUILD"
    ;;
 esac
 AC_SUBST([EFL_EIO_BUILD])
 
-requirements_eio="${requirements_eio} eet >= 1.7.6 eina >= 1.7.6 ecore >= 1.7.6"
+requirements_eio="${requirements_eio} eet >= 1.7.7 eina >= 1.7.7 ecore >= 1.7.7"
 AC_SUBST([requirements_eio])
 
 PKG_CHECK_MODULES([EIO], [${requirements_eio}])
