@@ -231,7 +231,7 @@ _eio_monitor_rename(Eio_Monitor *monitor, const char *newpath)
 {
   const char *tmp;
 
-  if (backend->parent->delete_me)
+  if (monitor->delete_me)
      return;
 
   /* destroy old state */
