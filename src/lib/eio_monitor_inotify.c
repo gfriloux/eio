@@ -267,13 +267,16 @@ void eio_monitor_backend_add(Eio_Monitor *monitor)
 
 void eio_monitor_backend_del(Eio_Monitor *monitor)
 {
+   Eio_Monitor_Backend *backend;
+
    if (!_inotify_fdh)
      eio_monitor_fallback_del(monitor);
 
-   if (!monitor->backend) return ;
-
-   eina_hash_del(_inotify_monitors, &monitor->backend->hwnd, monitor->backend);
+   backend = monitor->backend;
    monitor->backend = NULL;
+   if (!backend) return;
+
+   eina_hash_del(_inotify_monitors, &backend->hwnd, backend);
 }
 
 
