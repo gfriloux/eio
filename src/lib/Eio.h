@@ -734,7 +734,7 @@ EAPI Eina_Bool eio_file_check(Eio_File *ls);
  * @param ls The Eio_File ls request currently calling the filter callback.
  * @param key The key to associate data to.
  * @param data The data to associate the data to.
- * @param free_cb The function to call to free the associated data, @p free will be called if not specified.
+ * @param free_cb The function to call to free the associated data, @p free_cb will be called if not specified.
  * @return EINA_TRUE if insertion was fine.
  *
  * This function can only be safely called from within the filter callback.
@@ -749,7 +749,7 @@ EAPI Eina_Bool eio_file_associate_add(Eio_File *ls,
  * @param ls The Eio_File ls request currently calling the filter callback.
  * @param key The key to associate data to (will not be copied, and the pointer will not be used as long as the file is not notified).
  * @param data The data to associate the data to.
- * @param free_cb The function to call to free the associated data, @p free will be called if not specified.
+ * @param free_cb The function to call to free the associated data, @p free_cb will be called if not specified.
  * @return EINA_TRUE if insertion was fine.
  *
  * This function can only be safely called from within the filter callback.
