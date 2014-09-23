@@ -30,7 +30,7 @@ if test "x${_eio_want_inotify}" = "xyes" ; then
       [
        AC_DEFINE(HAVE_INOTIFY, 1, [ File monitoring with Inotify ])
        AC_DEFINE(HAVE_SYS_INOTIFY, 1, [ File monitoring with Inotify - sys/inotify.h ])
-       _ecore_have_inotify="yes"
+       _eio_have_inotify="yes"
       ],
       [
        AC_TRY_COMPILE(
@@ -40,9 +40,9 @@ if test "x${_eio_want_inotify}" = "xyes" ; then
           [return (-1 == inotify_init());],
           [
            AC_DEFINE([HAVE_INOTIFY], [1], [ File monitoring with Inotify ])
-           _ecore_have_inotify="yes"
+           _eio_have_inotify="yes"
           ],
-          [_ecore_have_inotify="no"])
+          [_eio_have_inotify="no"])
       ])
 fi
 
