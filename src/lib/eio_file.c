@@ -136,8 +136,8 @@ _eio_file_eina_ls_heavy(Ecore_Thread *thread, Eio_File_Direct_Ls *async, Eina_It
 
    if (!ls)
      {
-	eio_file_thread_error(&async->ls.common, thread);
-	return ;
+        eio_file_thread_error(&async->ls.common, thread);
+        return ;
      }
 
    eio_file_container_set(&async->ls.common, eina_iterator_container_get(ls));
@@ -146,36 +146,36 @@ _eio_file_eina_ls_heavy(Ecore_Thread *thread, Eio_File_Direct_Ls *async, Eina_It
 
    EINA_ITERATOR_FOREACH(ls, info)
      {
-	Eina_Bool filter = EINA_TRUE;
+        Eina_Bool filter = EINA_TRUE;
 
-	if (async->filter_cb)
-	  {
-	     filter = async->filter_cb((void*) async->ls.common.data, &async->ls.common, info);
-	  }
+        if (async->filter_cb)
+          {
+             filter = async->filter_cb((void*) async->ls.common.data, &async->ls.common, info);
+          }
 
-	if (filter)
-	  {
-	     Eio_File_Direct_Info *send_di;
+        if (filter)
+          {
+             Eio_File_Direct_Info *send_di;
 
-	     send_di = eio_direct_info_malloc();
-	     if (!send_di) continue;
+             send_di = eio_direct_info_malloc();
+             if (!send_di) continue;
 
-	     memcpy(&send_di->info, info, sizeof (Eina_File_Direct_Info));
-	     send_di->associated = async->ls.common.worker.associated;
-	     async->ls.common.worker.associated = NULL;
+             memcpy(&send_di->info, info, sizeof (Eina_File_Direct_Info));
+             send_di->associated = async->ls.common.worker.associated;
+             async->ls.common.worker.associated = NULL;
 
              pack = eina_list_append(pack, send_di);
-	  }
-	else if (async->ls.common.worker.associated)
-	  {
+          }
+        else if (async->ls.common.worker.associated)
+          {
              eina_hash_free(async->ls.common.worker.associated);
              async->ls.common.worker.associated = NULL;
-	  }
+          }
 
-   pack = eio_pack_send(thread, pack, &start);
+        pack = eio_pack_send(thread, pack, &start);
 
-	if (ecore_thread_check(thread))
-	  break;
+        if (ecore_thread_check(thread))
+          break;
      }
 
    if (pack) ecore_thread_feedback(thread, pack);
