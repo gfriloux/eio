@@ -315,6 +315,7 @@ struct _Eio_File_Ls
 {
    Eio_File common;
    const char *directory;
+   Eina_Iterator *ls;
 };
 
 struct _Eio_File_Direct_Ls

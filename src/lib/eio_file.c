@@ -180,9 +180,7 @@ _eio_file_eina_ls_heavy(Ecore_Thread *thread, Eio_File_Direct_Ls *async, Eina_It
 
    if (pack) ecore_thread_feedback(thread, pack);
 
-   eio_file_container_set(&async->ls.common, NULL);
-
-   eina_iterator_free(ls);
+   async->ls.ls = ls;
 }
 
 static void
@@ -701,9 +699,9 @@ void
 eio_async_end(void *data, Ecore_Thread *thread __UNUSED__)
 {
    Eio_File_Ls *async = data;
-
    async->common.done_cb((void*) async->common.data, &async->common);
-
+   eio_file_container_set(&async->common, NULL);
+   eina_iterator_free(async->ls);
    eio_async_free(async);
 }
 
