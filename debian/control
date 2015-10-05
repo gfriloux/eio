@@ -1,0 +1,42 @@
+Source: eio
+Section: libs
+Priority: extra
+Maintainer: Guillaume Friloux <guillaume.friloux@asp64.com>
+Build-Depends: debhelper (>= 7.0.50~), libecore-dev (>= 1.1.0~)
+Standards-Version: 3.8.4
+Homepage: http://enlightenment.org
+
+Package: libeio1
+Provides: libeio1
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: The Eio library is a library that implements an API for
+ asynchronous input/output operation. Most operation are done in a
+ separated thread to prevent lock.
+
+Package: libeio-dev
+Section: libdevel
+Architecture: any
+Depends: ${misc:Depends}, libeio1 (= ${binary:Version}), pkg-config
+Description: Eio headers and static libraries
+ The Eio library is a library that implements an API for
+ asynchronous input/output operation. Most operation are done in a
+ separated thread to prevent lock.
+ .
+ This package contains headers and libraries for the Eio library.
+
+Package: libeio-dbg
+Architecture: any
+Section: debug
+Depends: ${misc:Depends}, libeio1 (= ${binary:Version})
+Priority: extra
+Description: Debugging symbols for libeio
+ The Eio library is a library that implements an API for
+ asynchronous input/output operation. Most operation are done in a
+ separated thread to prevent lock.
+ .
+ This package contains unstripped shared libraries. It is provided primarily
+ to provide a backtrace with names in a debugger, this makes it somewhat easier
+ to interpret core dumps. The libraries are installed in /usr/lib/debug and
+ are automatically used by gdb.
+
