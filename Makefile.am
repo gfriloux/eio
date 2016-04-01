@@ -26,23 +26,24 @@ m4/libtool.m4 \
 m4/lt~obsolete.m4 \
 m4/ltoptions.m4 \
 m4/ltsugar.m4 \
-m4/ltversion.m4
+m4/ltversion.m4 \
+rpm/$(PACKAGE).spec
 
 EXTRA_DIST = \
 AUTHORS \
 COPYING \
 README \
 autogen.sh \
-eio.spec \
-eio.pc.in \
+$(PACKAGE).pc.in \
 m4/ac_attribute.m4 \
 m4/efl_doxygen.m4 \
 m4/efl_path_max.m4 \
 m4/efl_threads.m4 \
-m4/eio_check_options.m4
+m4/eio_check_options.m4 \
+rpm/$(PACKAGE).spec.in
 
 pkgconfigdir = $(libdir)/pkgconfig
-pkgconfig_DATA = eio.pc
+pkgconfig_DATA = $(PACKAGE).pc
 
 .PHONY: doc install-doc coverage benchmark
 

@@ -1,0 +1,60 @@
+%{!?_rel:%{expand:%%global _rel 0.enl%{?dist}}}
+%define _missing_doc_files_terminate_build 0
+
+Name:          @PACKAGE@
+Version:       @VERSION@
+Release:       %{_rel}
+License:       LGPLv2.1
+Group:         System Environment/Libraries
+URL:           http://www.enlightenment.org/
+Summary:       Enlightenment Input/Output Library
+Packager:      %{?_packager:%{_packager}}%{!?_packager:Michael Jennings <mej@eterm.org>}
+Vendor:        %{?_vendorinfo:%{_vendorinfo}}%{!?_vendorinfo:The Enlightenment Project (http://www.enlightenment.org/)}
+Distribution:  %{?_distribution:%{_distribution}}%{!?_distribution:%{_vendor}}
+Source:        %{name}-%{version}.tar.gz
+
+BuildRequires: pkgconfig subversion automake doxygen m4 autoconf gzip bzip2 tar
+BuildRequires: ecore-devel eina-devel
+
+%description
+Enlightenment input/output library
+
+%package devel
+Summary:       EIO headers, static libraries, documentation and test programs
+Group:         Development/Libraries
+Requires:      %{name} = %{version}
+
+%description devel
+Headers, static libraries, test programs and documentation for EIO
+
+%prep
+%setup -q
+
+%build
+%{configure}
+%__make %{?_smp_mflags} %{?mflags}
+
+%install
+%make_install
+
+%clean
+%__rm -rf %{buildroot}
+
+%post -p /sbin/ldconfig
+
+%postun -p /sbin/ldconfig
+
+%files
+%defattr(-, root, root)
+%doc AUTHORS COPYING NEWS README ChangeLog
+%{_libdir}/*.so.*
+
+%files devel
+%defattr(-, root, root)
+%{_includedir}/*
+%{_libdir}/*.a
+%{_libdir}/*.so
+%{_libdir}/*.la
+%{_libdir}/pkgconfig/*
+
+%changelog

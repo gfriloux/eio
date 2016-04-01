@@ -261,12 +261,12 @@ EFL_CHECK_INSTALL_EXAMPLES([enable_install_examples="yes"], [enable_install_exam
 
 
 AC_OUTPUT([
-eio.pc
-eio.spec
+${PACKAGE_NAME}.pc
 Makefile
 doc/Makefile
 doc/eio.dox
 doc/Doxyfile
+rpm/${PACKAGE_NAME}.spec
 src/Makefile
 src/lib/Makefile
 src/examples/Makefile
