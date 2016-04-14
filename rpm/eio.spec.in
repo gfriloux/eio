@@ -53,3 +53,5 @@ Headers, static libraries, test programs and documentation for EIO
 %{_libdir}/pkgconfig/*
 
 %changelog
+* %(LANG=C date "+%a %b %d %Y") Auto RPM build - %{version}-%{release}
+- version %{version}
