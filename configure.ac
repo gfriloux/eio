@@ -109,6 +109,8 @@ case "$host_os" in
    mingw*)
       PKG_CHECK_EXISTS([evil >= 1.7.10])
       AC_DEFINE([HAVE_EVIL], [1], [Set to 1 if evil package is installed])
+      AC_DEFINE([UNICODE], [1], [Set to 1 to use unicode version of windows api])
+      AC_DEFINE([_UNICODE], [1], [Set to 1 to use unicode version of windows api])
       requirements_eio="${requirements_eio} evil >= 1.7.10"
       EFL_EIO_BUILD="-DEFL_EIO_BUILD"
    ;;
