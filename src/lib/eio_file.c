@@ -610,16 +610,33 @@ eio_progress_cb(Eio_Progress *progress, Eio_File_Progress *op)
 Eina_Bool
 eio_file_copy_do(Ecore_Thread *thread, Eio_File_Progress *copy)
 {
+#ifdef _WIN32
+   BOOL r;
+   wchar_t *source = NULL;
+   wchar_t *dest = NULL;
+
+   source = evil_utf8_to_utf16(copy->source);
+   if (!source) goto on_error;
+
+   dest   = evil_utf8_to_utf16(copy->dest);
+   if (!dest) goto on_error;
+
+   r = CopyFile(source, dest, FALSE);
+   if (r == FALSE) goto on_error;
+
+   free(source);
+   free(dest);
+#else
    Eina_File *f;
-#ifdef HAVE_SPLICE
+# ifdef HAVE_SPLICE
    struct stat buf;
    int in = -1;
-#endif
+# endif
    mode_t md;
    int result = -1;
    int out = -1;
 
-#ifdef HAVE_SPLICE
+# ifdef HAVE_SPLICE
    in = open(copy->source, O_RDONLY);
    if (in < 0)
      {
@@ -635,31 +652,31 @@ eio_file_copy_do(Ecore_Thread *thread, Eio_File_Progress *copy)
      goto on_error;
 
    md = buf.st_mode;
-#endif
+# endif
 
    /* open write */
    out = open(copy->dest, O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR);
    if (out < 0)
      goto on_error;
 
-#ifdef HAVE_SPLICE
+# ifdef HAVE_SPLICE
    /* fast file copy code using Linux splice API */
    result = _eio_file_copy_splice(thread, copy, in, out, buf.st_size);
    if (result == 0)
      goto on_error;
-#endif
+# endif
 
    /* classic copy method using mmap and write */
    if (result == -1)
      {
-#ifndef HAVE_SPLICE
+# ifndef HAVE_SPLICE
         struct stat buf;
 
         if (stat(copy->source, &buf) < 0)
           goto on_error;
 
         md = buf.st_mode;
-#endif
+# endif
 
         f = eina_file_open(copy->source, 0);
         if (!f) goto on_error;
@@ -676,36 +693,41 @@ eio_file_copy_do(Ecore_Thread *thread, Eio_File_Progress *copy)
      }
    else
      {
-#if defined HAVE_XATTR && defined HAVE_SPLICE
+# if defined HAVE_XATTR && defined HAVE_SPLICE
        _eio_file_copy_xattr(thread, copy, in, out);
-#endif
+# endif
      }
 
    /* change access right to match source */
-#ifdef HAVE_CHMOD
+# ifdef HAVE_CHMOD
    if (fchmod(out, md) != 0)
      goto on_error;
-#else
+# else
    if (chmod(copy->dest, md) != 0)
      goto on_error;
-#endif
+# endif
 
    close(out);
-#ifdef HAVE_SPLICE
+# ifdef HAVE_SPLICE
    close(in);
+# endif
 #endif
-
    return EINA_TRUE;
 
  on_error:
    eio_file_thread_error(&copy->common, thread);
 
-#ifdef HAVE_SPLICE
+#ifdef _WIN32
+   free(source);
+   free(dest);
+#else
+# ifdef HAVE_SPLICE
    if (in >= 0) close(in);
-#endif
+# endif
    if (out >= 0) close(out);
    if (out >= 0)
      unlink(copy->dest);
+#endif
    return EINA_FALSE;
 }
 
