@@ -503,11 +503,34 @@ static void
 _eio_file_move_heavy(void *data, Ecore_Thread *thread)
 {
    Eio_File_Move *move = data;
+   int r;
+#ifdef _WIN32
+   wchar_t *source = NULL;
+   wchar_t *dest   = NULL;
 
-   if (rename(move->progress.source, move->progress.dest) < 0)
-     eio_file_thread_error(&move->progress.common, thread);
-   else
-     eio_progress_send(thread, &move->progress, 1, 1);
+   source = evil_utf8_to_utf16(move->progress.source);
+   if (!source) goto error;
+
+   dest   = evil_utf8_to_utf16(move->progress.dest);
+   if (!dest) goto error;
+
+   r = _wrename(source, dest);
+   free(source);
+   free(dest);
+#else
+   r = rename(move->progress.source, move->progress.dest);
+#endif
+   if (r < 0) goto error;
+
+   eio_progress_send(thread, &move->progress, 1, 1);
+   return;
+
+error:
+#ifdef _WIN32
+   free(source);
+   free(dest);
+#endif
+   eio_file_thread_error(&move->progress.common, thread);
 }
 
 static void
