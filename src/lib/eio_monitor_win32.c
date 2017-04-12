@@ -197,6 +197,7 @@ _eio_monitor_win32_watcher_new(Eio_Monitor      *monitor,
    Eio_Monitor_Win32_Watcher *w;
    char                      *monitored;
    DWORD                      filter;
+   wchar_t                   *wmonitored;
 
    w = (Eio_Monitor_Win32_Watcher *)calloc(1, sizeof(Eio_Monitor_Win32_Watcher));
    if (!w) return NULL;
@@ -213,7 +214,10 @@ _eio_monitor_win32_watcher_new(Eio_Monitor      *monitor,
         monitored[tmp - current] = '\0';
      }
 
-   w->handle = CreateFile(monitored,
+   wmonitored = evil_utf8_to_utf16(monitored);
+   if (!wmonitored) goto free_w;
+
+   w->handle = CreateFile(wmonitored,
                           FILE_LIST_DIRECTORY,
                           FILE_SHARE_READ |
                           FILE_SHARE_WRITE,
@@ -222,6 +226,7 @@ _eio_monitor_win32_watcher_new(Eio_Monitor      *monitor,
                           FILE_FLAG_BACKUP_SEMANTICS |
                           FILE_FLAG_OVERLAPPED,
                           NULL);
+   free(wmonitored);
    if (w->handle == INVALID_HANDLE_VALUE)
      goto free_w;
 
